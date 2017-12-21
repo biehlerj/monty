@@ -1,4 +1,4 @@
-#include "stacks.h"
+#include "monty.h"
 
 /**
  * stack_fxn - exectues the command if the command has been found to exist

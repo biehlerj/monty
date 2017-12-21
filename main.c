@@ -1,4 +1,4 @@
-#include "stacks.h"
+#include "monty.h"
 
 jay_t *jay;
 

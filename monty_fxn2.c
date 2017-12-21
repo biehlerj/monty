@@ -1,4 +1,4 @@
-#include "stacks.h"
+#include "monty.h"
 
 /**
  * _add - adds the data in the top two elements of the stack

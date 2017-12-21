@@ -1,5 +1,5 @@
-#ifndef _STACKS_H_
-#define _STACKS_H_
+#ifndef _MONTY_H_
+#define _MONTY_H_
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -89,4 +89,4 @@ size_t args_check(int ac);
 size_t file_check(FILE *file);
 stack_t *add_dnode(void);
 
-#endif /* _STACKS_H_ */
+#endif /* _MONTY_H_ */
