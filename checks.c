@@ -42,7 +42,7 @@ void stack_fxn(void)
 void error_check(unsigned int error_code)
 {
 	if (error_code == NOT_FILE)
-		printf("Error: can't open file %s\n", jay->file_name);
+		printf("Error: Can't open file %s\n", jay->file_name);
 	if (error_code == INCORRECT_ARGS)
 		printf("USAGE: monty file\n");
 	if (error_code == INVALID_CMD)
