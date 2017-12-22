@@ -122,6 +122,16 @@ void _pop(stack_t **stack, unsigned int line_number)
  */
 void _swap(stack_t **stack, unsigned int line_number)
 {
+	int swap = 0;
 	(void) stack;
 	(void) line_number;
+
+	if (jay->head && jay->head->next)
+	{
+		swap = jay->head->n;
+		jay->head->n = jay->head->next->n;
+		jay->head->next->n = swap;
+	}
+	else
+		error_check(SWAP_FAIL);
 }
