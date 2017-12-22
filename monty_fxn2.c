@@ -10,9 +10,15 @@
  */
 void _add(stack_t **stack, unsigned int line_number)
 {
+	int sum = 0;
 	(void) stack;
 	(void) line_number;
-	return;
+
+	if (!jay->head || !jay->head->next)
+		error_check(ADD_FAIL);
+	sum = jay->head->n + jay->head->next->n;
+	jay->head->next->n = sum;
+	_pop(NULL, 0);
 }
 
 /**
