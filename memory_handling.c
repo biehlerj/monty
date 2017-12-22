@@ -81,7 +81,7 @@ void free_line(void)
 }
 
 /**
- * free_token - frees the token if the program is exiting
+ * free_opcode_tkn - frees the token if the program is exiting
  * Description: frees the token stored currently on exit or other failure
  * Return: Nothing (void)
  */
