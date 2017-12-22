@@ -83,7 +83,10 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
-	return;
+
+	if (jay->head == NULL)
+		error_check(PINT_FAIL);
+	printf("%d\n", jay->head->n);
 }
 
 /**
@@ -97,7 +100,6 @@ void _pop(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
-	return;
 }
 
 /**
@@ -112,5 +114,4 @@ void _swap(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
-	return;
 }

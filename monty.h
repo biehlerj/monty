@@ -44,6 +44,7 @@ typedef struct instruction_s
  * @line: the variable used to get the lines from the file
  * @opcode_tkn: holds the token of the opcodes and any parameters
  * @file_name: the file name to be passed in error checks
+ * @file: the pointer to the file to be opened
  *
  * Description: structure to be externed and used throughout program to
  * manipulate the stack
@@ -60,7 +61,7 @@ typedef struct jay_s
 
 extern jay_t *jay;
 
-#define DELIM " \n"
+#define DELIM " '\n'"
 #define NOT_FILE 33
 #define INCORRECT_ARGS 98
 #define INVALID_CMD 93
