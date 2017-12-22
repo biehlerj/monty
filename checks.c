@@ -16,6 +16,7 @@ void stack_fxn(void)
 		{"swap", _swap},
 		{"add", _add},
 		{"nop", _nop},
+		{"sub", _sub},
 		{NULL, NULL}
 	};
 
@@ -59,6 +60,8 @@ void error_check(unsigned int error_code)
 		printf("L%d: can't add, stack too short\n", jay->line_count);
 	if (error_code == PUSH_FAIL)
 		printf("L%d: usage: push integer\n", jay->line_count);
+	if (error_code == SUB_FAIL)
+		printf("L%d: can't sub, stack too short\n", jay->line_count);
 	free_line();
 	free_dlist(jay->head);
 	free_opcode_tkn();

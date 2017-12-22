@@ -74,6 +74,7 @@ extern jay_t *jay;
 #define ADD_FAIL 25
 #define PUSH_FAIL 19
 #define NO_CMD 44
+#define SUB_FAIL 22
 
 void stack_fxn(void);
 void _push(stack_t **stack, unsigned int line_number);
@@ -91,5 +92,6 @@ stack_t *add_dnode(void);
 void free_opcode_tkn(void);
 void free_line(void);
 void cmd_token(char *line);
+void _sub(stack_t **stack, unsigned int line_number);
 
 #endif /* _MONTY_H_ */
