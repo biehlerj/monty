@@ -8,7 +8,6 @@
 void stack_fxn(void)
 {
 	unsigned int i;
-	stack_t **dummy = NULL;
 	instruction_t cmd[] = {
 		{"push", _push},
 		{"pall", _pall},
@@ -20,11 +19,18 @@ void stack_fxn(void)
 		{NULL, NULL}
 	};
 
-	for (i = 0; cmd[i].opcode != NULL; i++)
+	if (!jay->opcode_tkn[0])
+		return;
+	for (i = 0; cmd[i].opcode; i++)
 	{
-		if (strcmp(cmd[i].opcode, jay->opcode_tkn) == 0)
-			cmd[i].f(dummy, jay->line_count);
+		if (strcmp(jay->opcode_tkn[0], cmd[i].opcode) == 0)
+		{
+			cmd[i].f(NULL, 0);
+			break;
+		}
 	}
+	if (cmd[i].opcode == NULL)
+		error_check(INVALID_CMD);
 }
 
 /**
@@ -40,7 +46,7 @@ void error_check(unsigned int error_code)
 	if (error_code == INCORRECT_ARGS)
 		printf("USAGE: monty file\n");
 	if (error_code == INVALID_CMD)
-		printf("L%d: unknown instruction %s\n", jay->line_count, jay->opcode_tkn);
+		printf("L%d: unknown instruction %s\n", jay->line_count, jay->opcode_tkn[0]);
 	if (error_code == MEM_FAIL)
 		printf("Error: malloc failed");
 	if (error_code == PINT_FAIL)
@@ -53,5 +59,10 @@ void error_check(unsigned int error_code)
 		printf("L%d: can't add, stack too short\n", jay->line_count);
 	if (error_code == PUSH_FAIL)
 		printf("L%d: usage: push integer\n", jay->line_count);
+	free_line();
+	free_dlist(jay->head);
+	free_opcode_tkn();
+	if (jay->file)
+		fclose(jay->file);
 	exit(EXIT_FAILURE);
 }

@@ -13,80 +13,30 @@ jay_t *jay;
  */
 int main(int argc, char **argv)
 {
-	FILE *file;
-	char *data_tkn = malloc(sizeof(char *));
-	size_t len;
-	unsigned int exit_code = 0;
-	jay_t dummy = {NULL, NULL, NULL, NULL, 1};
+	size_t len = 0;
+	jay_t temp = {NULL, NULL, NULL, NULL, NULL, 0};
 
-	jay = &dummy;
-	exit_code = args_check(argc);
-	if (exit_code == INCORRECT_ARGS)
-		error_check(exit_code);
+	jay = &temp;
 	jay->file_name = argv[1];
-	file = fopen(jay->file_name, "r");
-	exit_code = file_check(file);
-	if (exit_code == NOT_FILE)
-		error_check(exit_code);
-	while (getline(&(jay->line), &len, file) != -1)
+	if (argc != 2)
+		error_check(INCORRECT_ARGS);
+	jay->file = fopen(jay->file_name, "r");
+	if (!jay->file)
+		error_check(NOT_FILE);
+	while (getline(&jay->line, &len, jay->file) != -1)
 	{
 		jay->line_count++;
-		jay->opcode_tkn = malloc(sizeof(char *));
-		if (jay->opcode_tkn == NULL || data_tkn == NULL)
-		{
-			exit_code = MEM_FAIL;
-			error_check(exit_code);
-		}
-		jay->opcode_tkn = strtok(jay->line, DELIM);
-		data_tkn = strtok(NULL, DELIM);
+		jay->opcode_tkn = malloc(sizeof(char *) * 2);
 		if (jay->opcode_tkn == NULL)
-		{
-			exit_code = NO_CMD;
-			error_check(exit_code);
-		}
+			error_check(MEM_FAIL);
+		cmd_token(jay->line);
 		stack_fxn();
-		free(jay->opcode_tkn);
-		free(data_tkn);
-
 	}
-	free(jay->line);
+	free_line();
 	free_dlist(jay->head);
-	fclose(file);
+	free_opcode_tkn();
+	fclose(jay->file);
 	return (0);
-}
-
-/**
- * add_dnode - adds a doubly linked node to the stack
- *
- * Description: creates a node for push to put on the stack
- * Return: pointer to the new node or NULL if fails
- */
-stack_t *add_dnode(void)
-{
-	stack_t *new = malloc(sizeof(stack_t));
-
-	if (new == NULL)
-		return (NULL);
-	new->n = 0;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
-/**
- * free_dlist - frees nodes in the stack
- * @head: pointer to the first node in the stack
- * Description: frees the node(s) as needed
- * Return: Nothing (void)
- */
-void free_dlist(stack_t *head)
-{
-	if (head == NULL)
-	{
-		if (head->next != NULL)
-			free_dlist(head->next);
-		free(head);
-	}
 }
 
 /**

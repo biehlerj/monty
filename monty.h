@@ -1,6 +1,12 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -31,7 +37,30 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#define DELIM " \t"
+/**
+ * struct jay_s - global variable to hold needed data for other functions
+ * @line_count: the line that is being parsed
+ * @head: the pointer to the head node of list
+ * @line: the variable used to get the lines from the file
+ * @opcode_tkn: holds the token of the opcodes and any parameters
+ * @file_name: the file name to be passed in error checks
+ *
+ * Description: structure to be externed and used throughout program to
+ * manipulate the stack
+ */
+typedef struct jay_s
+{
+	FILE *file;
+	stack_t *head;
+	char **opcode_tkn;
+	char *file_name;
+	char *line;
+	unsigned int line_count;
+} jay_t;
+
+extern jay_t *jay;
+
+#define DELIM " \n\t"
 #define NOT_FILE 33
 #define INCORRECT_ARGS 98
 #define INVALID_CMD 93
@@ -44,36 +73,6 @@ typedef struct instruction_s
 #define ADD_FAIL 25
 #define PUSH_FAIL 19
 #define NO_CMD 44
-
-/**
- * struct jay_s - global variable to hold needed data for other functions
- * @line_count: the line that is being parsed
- * @head: the pointer to the head node of list
- * @n: number to be put into linked list
- * @opcode_tkn: holds the token of the opcodes and any parameters
- * @file_name: the file name to be passed in error checks
- *
- * Description: structure to be externed and used throughout program to
- * manipulate the stack
- */
-typedef struct jay_s
-{
-	stack_t *head;
-	char *opcode_tkn;
-	char *file_name;
-	char *line;
-	unsigned int line_count;
-} jay_t;
-
-extern jay_t *jay;
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <ctype.h>
 
 void stack_fxn(void);
 void _push(stack_t **stack, unsigned int line_number);
@@ -88,5 +87,8 @@ void free_dlist(stack_t *head);
 size_t args_check(int ac);
 size_t file_check(FILE *file);
 stack_t *add_dnode(void);
+void free_opcode_tkn(void);
+void free_line(void);
+void cmd_token(char *line);
 
 #endif /* _MONTY_H_ */

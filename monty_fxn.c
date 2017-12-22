@@ -10,20 +10,17 @@
 void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new = NULL;
-	unsigned int i = 0, flag = 0, neg_flag = 0, error_code = 0;
-	char *cmp = jay->opcode_tkn;
+	unsigned int i = 0, flag = 0, neg_flag = 0;
+	char *cmp = jay->opcode_tkn[1];
 
 	(void) stack;
 	(void) line_number;
 	new = add_dnode();
 	if (new == NULL)
-	{
-		error_code =  MEM_FAIL;
-		error_check(error_code);
-	}
+		error_check(MEM_FAIL);
 	if (cmp != NULL)
 	{
-		if (cmp[0] != '-')
+		if (cmp[0] == '-')
 		{
 			i++;
 			flag = 1;
@@ -36,20 +33,20 @@ void _push(stack_t **stack, unsigned int line_number)
 				flag = 1;
 				break;
 			}
-			i++, flag = 0;
+			i++;
+			flag = 0;
 		}
 		if (flag == 0)
 		{
 			if (neg_flag == 1)
-				cmp = cmp + 1;
+				cmp += 1;
 			new->n = atoi(cmp);
 			if (neg_flag == 1)
 				new->n *= -1;
 			return;
 		}
 	}
-	error_code = PUSH_FAIL;
-	error_check(error_code);
+	error_check(PUSH_FAIL);
 }
 
 /**
@@ -62,16 +59,16 @@ void _push(stack_t **stack, unsigned int line_number)
  */
 void _pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *head = jay->head;
-
+	stack_t *temp = jay->head;
 	(void) stack;
 	(void) line_number;
-	if (head == NULL)
+
+	if (temp == NULL)
 		return;
-	while (head)
+	while (temp != NULL)
 	{
-		printf("%d\n", head->n);
-		head = head->next;
+		printf("%d\n", temp->n);
+		temp = temp->next;
 	}
 }
 
