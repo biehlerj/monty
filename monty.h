@@ -60,7 +60,7 @@ typedef struct jay_s
 
 extern jay_t *jay;
 
-#define DELIM " \n\t"
+#define DELIM " \n"
 #define NOT_FILE 33
 #define INCORRECT_ARGS 98
 #define INVALID_CMD 93

@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 			error_check(MEM_FAIL);
 		cmd_token(jay->line);
 		stack_fxn();
+		free_opcode_tkn();
 	}
 	free_line();
 	free_dlist(jay->head);
