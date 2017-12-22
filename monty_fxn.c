@@ -98,8 +98,18 @@ void _pint(stack_t **stack, unsigned int line_number)
  */
 void _pop(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp;
 	(void) stack;
 	(void) line_number;
+
+	if (jay->head == NULL)
+		error_check(POP_FAIL);
+	temp = jay->head->next;
+	if (temp != NULL)
+		temp->prev = NULL;
+	free(jay->head);
+	jay->head = temp;
+
 }
 
 /**
