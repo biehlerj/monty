@@ -41,3 +41,26 @@ void _sub(stack_t **stack, unsigned int line_number)
 	jay->head->next->n = diff;
 	_pop(NULL, 0);
 }
+
+/**
+ * _div - divides the top two elements of the stack
+ * @stack: dummy variable
+ * @line_number: dummy variable
+ * Description: divides the second element of the stack by the top element
+ * of the stack and makes the result the top of the stack
+ * Return: Nothing (void)
+ */
+void _div(stack_t **stack, unsigned int line_number)
+{
+	int remainder = 0;
+	(void) stack;
+	(void) line_number;
+
+	if (!jay->head || !jay->head->next)
+		error_check(DIV_FAIL);
+	if (jay->head->n == 0)
+		error_check(DIV_BY_ZERO);
+	remainder = jay->head->next->n / jay->head->n;
+	jay->head->next->n = remainder;
+	_pop(NULL, 0);
+}

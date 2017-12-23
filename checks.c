@@ -62,6 +62,10 @@ void error_check(unsigned int error_code)
 		printf("L%d: usage: push integer\n", jay->line_count);
 	if (error_code == SUB_FAIL)
 		printf("L%d: can't sub, stack too short\n", jay->line_count);
+	if (error_code == DIV_FAIL)
+		printf("L%d: can't div, stack too short\n", jay->line_count);
+	if (error_code == DIV_BY_ZERO)
+		printf("L%d: division by zero\n", jay->line_count);
 	free_line();
 	free_dlist(jay->head);
 	free_opcode_tkn();
