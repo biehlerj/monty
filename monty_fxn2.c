@@ -85,3 +85,27 @@ void _mul(stack_t **stack, unsigned int line_number)
 	jay->head->next->n = product;
 	_pop(NULL, 0);
 }
+
+/**
+ * _mod - computes remainder of the division of the top two elements of stack
+ * @stack: dummy variable
+ * @line_number: dummy variable
+ * Description: computes the remainder of the division of the second element
+ * of the stack by the first element of the stack and makes the result the
+ * top of the stack
+ * Return: Nothing (void)
+ */
+void _mod(stack_t **stack, unsigned int line_number)
+{
+	int mod = 0;
+	(void) stack;
+	(void) line_number;
+
+	if (!jay->head || !jay->head->next)
+		error_check(MOD_FAIL);
+	if (jay->head->n == 0)
+		error_check(MOD_BY_ZERO);
+	mod = jay->head->next->n % jay->head->n;
+	jay->head->next->n = mod;
+	_pop(NULL, 0);
+}

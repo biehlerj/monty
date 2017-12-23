@@ -78,6 +78,8 @@ extern jay_t *jay;
 #define DIV_FAIL 76
 #define DIV_BY_ZERO 99
 #define MUL_FAIL 100
+#define MOD_FAIL 101
+#define MOD_BY_ZERO 102
 
 void stack_fxn(void);
 void _push(stack_t **stack, unsigned int line_number);
@@ -98,5 +100,6 @@ void cmd_token(char *line);
 void _sub(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
 void _mul(stack_t **stack, unsigned int line_number);
+void _mod(stack_t **stack, unsigned int line_number);
 
 #endif /* _MONTY_H_ */
