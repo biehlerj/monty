@@ -4,6 +4,6 @@ push 100
 pall
 div
 pall
-push 0
-div
+push 25
+mul
 pall

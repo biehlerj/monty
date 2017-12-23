@@ -18,6 +18,7 @@ void stack_fxn(void)
 		{"nop", _nop},
 		{"sub", _sub},
 		{"div", _div},
+		{"mul", _mul},
 		{NULL, NULL}
 	};
 
@@ -67,6 +68,8 @@ void error_check(unsigned int error_code)
 		printf("L%d: can't div, stack too short\n", jay->line_count);
 	if (error_code == DIV_BY_ZERO)
 		printf("L%d: division by zero\n", jay->line_count);
+	if (error_code == MUL_FAIL)
+		printf("L%d: can't mul, stack too short\n", jay->line_count);
 	free_line();
 	free_dlist(jay->head);
 	free_opcode_tkn();

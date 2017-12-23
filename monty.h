@@ -77,6 +77,7 @@ extern jay_t *jay;
 #define SUB_FAIL 22
 #define DIV_FAIL 76
 #define DIV_BY_ZERO 99
+#define MUL_FAIL 100
 
 void stack_fxn(void);
 void _push(stack_t **stack, unsigned int line_number);
@@ -96,5 +97,6 @@ void free_line(void);
 void cmd_token(char *line);
 void _sub(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
+void _mul(stack_t **stack, unsigned int line_number);
 
 #endif /* _MONTY_H_ */

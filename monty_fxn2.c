@@ -64,3 +64,24 @@ void _div(stack_t **stack, unsigned int line_number)
 	jay->head->next->n = remainder;
 	_pop(NULL, 0);
 }
+
+/**
+ * _mul - multiplies the top two elements of the stack
+ * @stack: dummy variable
+ * @line_number: dummy variable
+ * Description: multiplies the second element of the stack by the top element
+ * of the stack and makes the product the top of the stack
+ * Return: Nothing void
+ */
+void _mul(stack_t **stack, unsigned int line_number)
+{
+	int product = 0;
+	(void) stack;
+	(void) line_number;
+
+	if (!jay->head || !jay->head->next)
+		error_check(MUL_FAIL);
+	product = jay->head->next->n * jay->head->n;
+	jay->head->next->n = product;
+	_pop(NULL, 0);
+}
